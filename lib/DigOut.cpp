@@ -1,11 +1,13 @@
 #include <DigOut.hpp>
+#include <iostream>
 
 //using namespace flink::eeros;
 using namespace flink;
 using namespace eeros::hal;
 
-DigOut::DigOut(std::string id, FlinkDevice *device, uint32_t subDeviceNumber, uint32_t channel, bool inverted): PeripheralOutput<bool>(id) ,channel(channel), inverted(inverted){
-	this->subdeviceHandle = flink_get_subdevice_by_id(device->getDeviceHandle(), subDeviceNumber);
+DigOut::DigOut(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted): PeripheralOutput<bool>(id) ,channel(channel), inverted(inverted){
+	flink_dev *devHandle = FlinkDevice::getDeviceHandle(device);
+	this->subdeviceHandle = flink_get_subdevice_by_id(devHandle, subDeviceNumber);
 	
 	flink_dio_set_direction(subdeviceHandle, channel, FLINK_OUTPUT);
 }
@@ -24,6 +26,7 @@ void DigOut::set(bool value){
 	flink_dio_set_value(subdeviceHandle, channel, value);
 }
 
-extern "C" eeros::hal::PeripheralOutput<bool> *createDigOut(std::string id, FlinkDevice *device, uint32_t subDeviceNumber, uint32_t channel, bool inverted){
+extern "C" eeros::hal::PeripheralOutput<bool> *createDigOut(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted){
+	printf("create device");
 	return new flink::DigOut(id, device, subDeviceNumber, channel, inverted);
 }

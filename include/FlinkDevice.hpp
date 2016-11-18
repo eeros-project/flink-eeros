@@ -12,14 +12,12 @@ namespace flink {
 		virtual ~FlinkDevice();
 		
 		flink_dev* getDeviceHandle();
+		static flink_dev* getDeviceHandle(std::string deviceNode);
 
 	private:
 		flink_dev *it;
+		static std::map<std::string, flink_dev *> devices;
 	};
 };
-
-extern "C"{
-	flink::FlinkDevice *createFlinkDevice(std::string deviceNode);
-}
 
 #endif /* FLINKEEROS_DEVICE_HPP_ */

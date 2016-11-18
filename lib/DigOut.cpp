@@ -6,9 +6,10 @@ using namespace flink;
 using namespace eeros::hal;
 
 DigOut::DigOut(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted): PeripheralOutput<bool>(id) ,channel(channel), inverted(inverted){
-	flink_dev *devHandle = FlinkDevice::getDeviceHandle(device);
-	this->subdeviceHandle = flink_get_subdevice_by_id(devHandle, subDeviceNumber);
-	
+	FlinkDevice *devHandle = FlinkDevice::getDevice(device);
+	std::cout << "subdev " << subDeviceNumber << " channel " << channel << std::endl;
+	this->subdeviceHandle = flink_get_subdevice_by_id(devHandle->getDeviceHandle(), subDeviceNumber);
+	std::cout << "here2" << std::endl;
 	flink_dio_set_direction(subdeviceHandle, channel, FLINK_OUTPUT);
 }
 

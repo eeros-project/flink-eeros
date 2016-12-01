@@ -3,16 +3,16 @@
 
 #include <string>
 #include <flinklib.h>
-#include <eeros/hal/PeripheralOutput.hpp>
+#include <eeros/hal/Output.hpp>
 #include <FlinkDevice.hpp>
 
 extern "C"{
-	eeros::hal::PeripheralOutput<bool> *createDigOut(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted);
+	eeros::hal::Output<bool> *createDigOut(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted);
 }
 
 namespace flink{
 //	namespace eeros{
-		class DigOut : public eeros::hal::PeripheralOutput<bool> {
+		class DigOut : public eeros::hal::Output<bool> {
 		public:
 			DigOut(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted = false);
 			virtual bool get();

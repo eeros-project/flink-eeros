@@ -22,6 +22,5 @@ bool DigIn::get(){
 }
 
 extern "C" eeros::hal::Input<bool> *createDigIn(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted){
-	printf("create device");
 	return new flink::DigIn(id, device, subDeviceNumber, channel, inverted);
 }

@@ -14,6 +14,8 @@ AnalogOut::AnalogOut(std::string id, std::string device, uint32_t subDeviceNumbe
 	
 	this->scale = scale;
 	this->offset = offset;
+	this->minOut = rangeMin;
+	this->maxOut = rangeMax;
 	this->unit = unit;
 }
 

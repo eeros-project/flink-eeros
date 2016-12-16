@@ -32,7 +32,7 @@ double AnalogIn::get() {
 		if(complementsData < minIn){
 			complementsData = minIn;
 		}
-		return complementsData  * scale / bitMask + offset;	
+		return complementsData  / scale / bitMask + offset;	//TODO test Analog in scale, was * scale before
 	}else{
 		if(data > maxIn){		//TODO think: saturation bad choice on input?
 			data = maxIn;
@@ -40,7 +40,7 @@ double AnalogIn::get() {
 		if(data < minIn){
 			data = minIn;
 		}
-		return data * scale / bitMask + offset;
+		return data / scale / bitMask + offset;			//TODO test Analog in scale, was * scale before
 	}
 }
 

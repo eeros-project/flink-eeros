@@ -26,7 +26,7 @@ double Fqd::get() {
 	int16_t newPos = static_cast<uint16_t>(data);
 	int16_t deltaPos = newPos - prevPos;
 	prevPos = newPos;
-	double delta = deltaPos * scale + offset;
+	double delta = deltaPos / scale + offset;
 	pos += delta;
 	
 	if (getDelta)

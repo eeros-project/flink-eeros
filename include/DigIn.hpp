@@ -11,17 +11,15 @@ extern "C"{
 }
 
 namespace flink{
-//	namespace eeros{
-		class DigIn : public eeros::hal::Input<bool> {
-		public:
-			DigIn(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted = false);
-			virtual bool get();
-		private:
-			flink_subdev* subdeviceHandle;
-			uint32_t channel;
-			bool inverted;
-		};
-//	};	
+	class DigIn : public eeros::hal::Input<bool> {
+	public:
+		DigIn(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted = false);
+		virtual bool get();
+	private:
+		flink_subdev* subdeviceHandle;
+		uint32_t channel;
+		bool inverted;
+	};
 };
 
 #endif /* FLINKEEROS_DIGIN_HPP_ */

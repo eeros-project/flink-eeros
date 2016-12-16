@@ -7,13 +7,13 @@
 #include <FlinkDevice.hpp>
 
 extern "C"{
-	eeros::hal::Output<bool> *createDigOut(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted);
+	eeros::hal::Output<bool> *createDigOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted);
 }
 
 namespace flink{
 	class DigOut : public eeros::hal::Output<bool> {
 	public:
-		DigOut(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted = false);
+		DigOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted = false);
 		virtual bool get();
 		virtual void set(bool value);
 	private:

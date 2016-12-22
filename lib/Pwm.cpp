@@ -46,7 +46,7 @@ extern "C"{
 		return new flink::Pwm(id, libHandle, device, subDeviceNumber, channel, scale, offset, rangeMin, rangeMax, unit);
 	}
 	
-	void *setFrequency(Pwm *obj, double f){
+	void setFrequency(Pwm *obj, double f){
 		obj->setFrequency(f);
 	}
 }

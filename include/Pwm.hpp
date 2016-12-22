@@ -9,7 +9,7 @@
 
 extern "C"{
 	eeros::hal::ScalableOutput<double> *createPwm(std::string id, void *libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit);
-	void *setFrequency(Pwm *obj, double f);
+	void setFrequency(Pwm *obj, double f);
 }
 
 namespace flink {

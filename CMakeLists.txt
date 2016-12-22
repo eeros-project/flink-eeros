@@ -18,4 +18,11 @@ link_directories(${ADDITIONAL_LINK_DIRS})
 add_subdirectory(lib)
 add_subdirectory(test)
 
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/FlinkDevice.hpp ${CMAKE_CURRENT_SOURCE_DIR}/include/DigOut.hpp ${CMAKE_CURRENT_SOURCE_DIR}/include/DigIn.hpp ${CMAKE_CURRENT_SOURCE_DIR}/include/AnalogOut.hpp ${CMAKE_CURRENT_SOURCE_DIR}/include/AnalogIn.hpp ${CMAKE_CURRENT_SOURCE_DIR}/include/Fqd.hpp ${CMAKE_CURRENT_SOURCE_DIR}/include/Pwm.hpp DESTINATION include)
+INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/FlinkDevice.hpp 
+	      ${CMAKE_CURRENT_SOURCE_DIR}/include/DigOut.hpp 
+	      ${CMAKE_CURRENT_SOURCE_DIR}/include/DigIn.hpp 
+	      ${CMAKE_CURRENT_SOURCE_DIR}/include/AnalogOut.hpp 
+	      ${CMAKE_CURRENT_SOURCE_DIR}/include/AnalogIn.hpp 
+	      ${CMAKE_CURRENT_SOURCE_DIR}/include/Fqd.hpp 
+	      ${CMAKE_CURRENT_SOURCE_DIR}/include/Pwm.hpp 
+	      ${CMAKE_CURRENT_SOURCE_DIR}/include/Watchdog.hpp DESTINATION include)

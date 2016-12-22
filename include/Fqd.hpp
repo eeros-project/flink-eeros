@@ -4,13 +4,10 @@
 #include <string>
 #include <flinklib.h>
 #include <eeros/hal/ScalableInput.hpp>
-#include <eeros/hal/FlinkDevice.hpp>
 #include <FlinkDevice.hpp>
 #include <limits>
 
-extern "C"{
-	eeros::hal::ScalableInput<double> *createFqd(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit, bool getDelta);
-}
+
 
 namespace flink {
 	class Fqd : public eeros::hal::ScalableInput<double> {
@@ -27,5 +24,10 @@ namespace flink {
 		bool getDelta;
 	};
 };
+
+extern "C"{
+	eeros::hal::ScalableInput<double> *createFqd(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit, bool getDelta);
+	void resetFqd(flink::Fqd *obj);
+}
 
 #endif /* FLINKEEROS_FQD_HPP_ */

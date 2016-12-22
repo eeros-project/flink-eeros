@@ -7,11 +7,6 @@
 #include <FlinkDevice.hpp>
 #include <limits>
 
-extern "C"{
-	eeros::hal::ScalableOutput<double> *createPwm(std::string id, void *libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit);
-	void setFrequency(Pwm *obj, double f);
-}
-
 namespace flink {
 	class Pwm : public eeros::hal::ScalableOutput<double> {
 	public:
@@ -28,5 +23,11 @@ namespace flink {
 		uint32_t baseFrequency;
 	};
 };
+
+extern "C"{
+	eeros::hal::ScalableOutput<double> *createPwm(std::string id, void *libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit);
+	void setPwmFrequency(flink::Pwm *obj, double f);
+	void setPwmDutyCycle(flink::Pwm *obj, double d);
+}
 
 #endif /* FLINKEEROS_PWM_HPP_ */

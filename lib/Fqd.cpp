@@ -4,6 +4,7 @@ using namespace flink;
 using namespace eeros::hal;
 
 Fqd::Fqd(std::string id, 
+					 void* libHandle, 
 					 std::string device,
 					 uint32_t subDeviceNumber,
 					 uint32_t channel,
@@ -13,7 +14,7 @@ Fqd::Fqd(std::string id,
 					 double rangeMax,
 					 std::string unit,
 					 bool getDelta) : 
-	ScalableInput<double>(id, scale, offset, rangeMin, rangeMax, unit), channel(channel), prevPos(0), getDelta(getDelta)
+	ScalableInput<double>(id, libHandle, scale, offset, rangeMin, rangeMax, unit), channel(channel), prevPos(0), getDelta(getDelta)
 {
 	FlinkDevice *dev = FlinkDevice::getDevice(device);
 	this->subdeviceHandle = flink_get_subdevice_by_id(dev->getDeviceHandle(), subDeviceNumber);
@@ -41,8 +42,8 @@ void Fqd::reset() {
 }
 
 extern "C"{
-	eeros::hal::ScalableInput<double> *createFqd(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit, bool getDelta){
-		return new flink::Fqd(id, device, subDeviceNumber, channel, scale, offset, rangeMin, rangeMax, unit, getDelta);
+	eeros::hal::ScalableInput<double> *createFqd(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit){
+		return new flink::Fqd(id, libHandle, device, subDeviceNumber, channel, scale, offset, rangeMin, rangeMax, unit);
 	}
 	
 	void resetFqd(flink::Fqd *obj){

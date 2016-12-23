@@ -25,6 +25,6 @@ void DigOut::set(bool value){
 	flink_dio_set_value(subdeviceHandle, channel, value);
 }
 
-extern "C" eeros::hal::Output<bool> *createDigOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted){
-	return new flink::DigOut(id, libHandle, device, subDeviceNumber, channel, inverted);
+extern "C" eeros::hal::Output<bool> *createDigOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel){
+	return new flink::DigOut(id, libHandle, device, subDeviceNumber, channel);
 }

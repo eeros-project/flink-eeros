@@ -3,7 +3,7 @@
 using namespace flink;
 using namespace eeros::hal;
 
-AnalogIn::AnalogIn(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit, bool twosComplement) : ScalableInput<double>(id, scale, offset, rangeMin, rangeMax, unit), channel(channel), bitMask(0) {
+AnalogIn::AnalogIn(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit, bool twosComplement) : ScalableInput<double>(id, libHandle, scale, offset, rangeMin, rangeMax, unit), channel(channel), bitMask(0) {
 	// TODO untested!!
 	FlinkDevice *dev = FlinkDevice::getDevice(device);
 	this->subdeviceHandle = flink_get_subdevice_by_id(dev->getDeviceHandle(), subDeviceNumber);
@@ -45,7 +45,7 @@ double AnalogIn::get() {
 }
 
 extern "C"{
-	eeros::hal::ScalableInput<double> *createAnalgIn(std::string id, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit, bool twosComplement){
-		return new flink::AnalogIn(id, device, subDeviceNumber, channel, scale, offset, rangeMin, rangeMax, unit, twosComplement);
+	eeros::hal::ScalableInput<double> *createAnalgIn(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit, bool twosComplement){
+		return new flink::AnalogIn(id, libHandle, device, subDeviceNumber, channel, scale, offset, rangeMin, rangeMax, unit, twosComplement);
 	}
 }

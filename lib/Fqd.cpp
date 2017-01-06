@@ -39,6 +39,7 @@ double Fqd::get() {
 void Fqd::reset() {
 	flink_subdevice_reset(subdeviceHandle); // TODO only reset counter, not the subdevice!
 	pos = 0;
+	prevPos = 0;
 }
 
 extern "C"{

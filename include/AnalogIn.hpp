@@ -1,5 +1,5 @@
-#ifndef FLINKEEROS_ANALOGIN_HPP_
-#define FLINKEEROS_ANALOGIN_HPP_
+#ifndef FLINK_EEROS_ANALOGIN_HPP_
+#define FLINK_EEROS_ANALOGIN_HPP_
 
 #include <string>
 #include <flinklib.h>
@@ -25,4 +25,4 @@ namespace flink{
 	};
 };
 
-#endif /* FLINKEEROS_ANALOGIN_HPP_ */
+#endif /* FLINK_EEROS_ANALOGIN_HPP_ */

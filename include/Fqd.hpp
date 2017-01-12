@@ -1,5 +1,5 @@
-#ifndef FLINKEEROS_FQD_HPP_
-#define FLINKEEROS_FQD_HPP_
+#ifndef FLINK_EEROS_FQD_HPP_
+#define FLINK_EEROS_FQD_HPP_
 
 #include <string>
 #include <flinklib.h>
@@ -30,4 +30,4 @@ extern "C"{
 	void resetFqd(flink::Fqd *obj);
 }
 
-#endif /* FLINKEEROS_FQD_HPP_ */
+#endif /* FLINK_EEROS_FQD_HPP_ */

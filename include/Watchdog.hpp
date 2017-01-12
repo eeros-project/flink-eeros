@@ -1,5 +1,5 @@
-#ifndef FLINKEEROS_WATCHDOG_HPP_
-#define FLINKEEROS_WATCHDOG_HPP_
+#ifndef FLINK_EEROS_WATCHDOG_HPP_
+#define FLINK_EEROS_WATCHDOG_HPP_
 
 #include <string>
 #include <flinklib.h>
@@ -30,4 +30,4 @@ extern "C"{
 	void setWatchdogTimeout(flink::Watchdog *obj, double t);
 }
 
-#endif /* FLINKEEROS_WATCHDOG_HPP_ */
+#endif /* FLINK_EEROS_WATCHDOG_HPP_ */

@@ -1,5 +1,5 @@
-#ifndef FLINKEEROS_PWM_HPP_
-#define FLINKEEROS_PWM_HPP_
+#ifndef FLINK_EEROS_PWM_HPP_
+#define FLINK_EEROS_PWM_HPP_
 
 #include <string>
 #include <flinklib.h>
@@ -30,4 +30,4 @@ extern "C"{
 	void setPwmDutyCycle(flink::Pwm *obj, double d);
 }
 
-#endif /* FLINKEEROS_PWM_HPP_ */
+#endif /* FLINK_EEROS_PWM_HPP_ */

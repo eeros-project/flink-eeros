@@ -1,5 +1,5 @@
-#ifndef FLINKEEROS_DEVICE_HPP_
-#define FLINKEEROS_DEVICE_HPP_
+#ifndef FLINK_EEROS_DEVICE_HPP_
+#define FLINK_EEROS_DEVICE_HPP_
 
 #include <string>
 #include <map>
@@ -21,4 +21,4 @@ namespace flink {
 	};
 };
 
-#endif /* FLINKEEROS_DEVICE_HPP_ */
+#endif /* FLINK_EEROS_DEVICE_HPP_ */

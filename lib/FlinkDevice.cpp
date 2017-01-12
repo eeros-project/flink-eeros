@@ -20,6 +20,7 @@ FlinkDevice::FlinkDevice(std::string deviceNode) {
 
 FlinkDevice::~FlinkDevice() {
 	flink_close(it);
+	devices.clear();
 }
 
 flink_dev* FlinkDevice::getDeviceHandle() {

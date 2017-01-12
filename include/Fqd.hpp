@@ -12,7 +12,10 @@
 namespace flink {
 	class Fqd : public eeros::hal::ScalableInput<double> {
 	public:
-		Fqd(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale = 1, double offset = 0, double rangeMin = std::numeric_limits<double>::min(), double rangeMax = std::numeric_limits<double>::max(), std::string unit = "", bool getDelta = false);
+		Fqd(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, 
+		    double scale = 1, double offset = 0, 
+		    double rangeMin = std::numeric_limits<double>::min(), double rangeMax = std::numeric_limits<double>::max(), 
+		    std::string unit = "", bool getDelta = false);
 		virtual double get();
 		void reset();
 		
@@ -26,7 +29,9 @@ namespace flink {
 };
 
 extern "C"{
-	eeros::hal::ScalableInput<double> *createFqd(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit);
+	eeros::hal::ScalableInput<double> *createFqd(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, 
+						     uint32_t channel, double scale, double offset, 
+						     double rangeMin, double rangeMax, std::string unit);
 	void resetFqd(flink::Fqd *obj);
 }
 

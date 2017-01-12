@@ -6,10 +6,6 @@
 #include <eeros/hal/Input.hpp>
 #include <FlinkDevice.hpp>
 
-extern "C"{
-	eeros::hal::Input<bool> *createDigIn(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted);
-}
-
 namespace flink{
 	class DigIn : public eeros::hal::Input<bool> {
 	public:
@@ -21,5 +17,9 @@ namespace flink{
 		bool inverted;
 	};
 };
+
+extern "C"{
+	eeros::hal::Input<bool> *createDigIn(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted);
+}
 
 #endif /* FLINK_EEROS_DIGIN_HPP_ */

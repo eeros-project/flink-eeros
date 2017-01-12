@@ -42,7 +42,8 @@ void Pwm::setDutyCycle(double d) {
 }
 
 extern "C"{
-	eeros::hal::ScalableOutput<double> *createPwm(std::string id, void *libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit){
+	eeros::hal::ScalableOutput<double> *createPwm(std::string id, void *libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, 
+						      double scale, double offset, double rangeMin, double rangeMax, std::string unit){
 		return new flink::Pwm(id, libHandle, device, subDeviceNumber, channel, scale, offset, rangeMin, rangeMax, unit);
 	}
 	

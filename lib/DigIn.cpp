@@ -5,7 +5,8 @@
 using namespace flink;
 using namespace eeros::hal;
 
-DigIn::DigIn(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted): Input<bool>(id, libHandle) ,channel(channel), inverted(inverted){
+DigIn::DigIn(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted): 
+				Input<bool>(id, libHandle) ,channel(channel), inverted(inverted){
 	FlinkDevice *dev = FlinkDevice::getDevice(device);
 	this->subdeviceHandle = flink_get_subdevice_by_id(dev->getDeviceHandle(), subDeviceNumber);
 	

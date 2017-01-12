@@ -6,10 +6,6 @@
 #include <eeros/hal/Output.hpp>
 #include <FlinkDevice.hpp>
 
-extern "C"{
-	eeros::hal::Output<bool> *createDigOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel);
-}
-
 namespace flink{
 	class DigOut : public eeros::hal::Output<bool> {
 	public:
@@ -22,5 +18,9 @@ namespace flink{
 		bool inverted;
 	};
 };
+
+extern "C"{
+	eeros::hal::Output<bool> *createDigOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted);
+}
 
 #endif /* FLINK_EEROS_DIGOUT_HPP_ */

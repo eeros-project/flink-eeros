@@ -43,7 +43,8 @@ void Fqd::reset() {
 }
 
 extern "C"{
-	eeros::hal::ScalableInput<double> *createFqd(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale, double offset, double rangeMin, double rangeMax, std::string unit){
+	eeros::hal::ScalableInput<double> *createFqd(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, 
+						     double scale, double offset, double rangeMin, double rangeMax, std::string unit){
 		return new flink::Fqd(id, libHandle, device, subDeviceNumber, channel, scale, offset, rangeMin, rangeMax, unit);
 	}
 	

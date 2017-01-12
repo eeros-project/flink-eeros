@@ -2,7 +2,8 @@
 using namespace flink;
 using namespace eeros::hal;
 
-Watchdog::Watchdog(std::string id, void *libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double timeout) : Output<bool>(id, libHandle), channel(channel) {
+Watchdog::Watchdog(std::string id, void *libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double timeout) : 
+					Output<bool>(id, libHandle), channel(channel) {
 	FlinkDevice *dev = FlinkDevice::getDevice(device);
 	subdeviceHandle = flink_get_subdevice_by_id(dev->getDeviceHandle(), subDeviceNumber);
 	flink_wd_get_baseclock(subdeviceHandle, &baseClock);

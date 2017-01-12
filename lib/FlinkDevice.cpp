@@ -9,7 +9,7 @@ std::map<std::string, FlinkDevice *> FlinkDevice::devices;
 FlinkDevice::FlinkDevice(std::string deviceNode) {
 	auto devIt = devices.find(deviceNode);
 	if(devIt != devices.end()){
-		throw new eeros::EEROSException("claim already opened device via getDevice()");
+		throw new eeros::EEROSException("device already open, claim already opened device via getDevice()");
 	}
 	it = flink_open(deviceNode.c_str());
 	if(!it) {

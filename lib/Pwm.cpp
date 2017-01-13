@@ -36,9 +36,9 @@ void Pwm::setFrequency(double f) {
 }
 
 void Pwm::setDutyCycle(double d) {
-	if(d >= 0 && d <= 1) {
-		flink_pwm_set_hightime(subdeviceHandle, channel, (uint32_t)(baseFrequency / pwmFrequency * d));
-	}
+	if(d < 0.0) d = 0.0;
+	if(d > 1.0) d = 1.0;
+	flink_pwm_set_hightime(subdeviceHandle, channel, (uint32_t)(baseFrequency / pwmFrequency * d));
 }
 
 extern "C"{

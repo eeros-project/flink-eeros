@@ -29,13 +29,9 @@ double AnalogOut::get() {
 void AnalogOut::setValue(uint32_t value) {
 	
 	value &= bitMask;
-	// check range TODO: throw exception? so that user knows that his values are out of range?
-	if( value > maxOut ){
-		value = maxOut;
-	}
-	if( value < minOut ){
-		value = minOut;
-	}
+	// check range
+	if( value > maxOut ) value = maxOut;
+	if( value < minOut ) value = minOut;
 	flink_analog_out_set_value(subdeviceHandle, channel, value);
 }
 

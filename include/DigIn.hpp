@@ -4,7 +4,7 @@
 #include <string>
 #include <flinklib.h>
 #include <eeros/hal/Input.hpp>
-#include <FlinkDevice.hpp>
+#include "FlinkDevice.hpp"
 
 namespace flink{
 	class DigIn : public eeros::hal::Input<bool> {

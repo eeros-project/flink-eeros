@@ -4,7 +4,7 @@
 #include <string>
 #include <flinklib.h>
 #include <eeros/hal/ScalableOutput.hpp>
-#include <FlinkDevice.hpp>
+#include "FlinkDevice.hpp"
 #include <limits>
 
 namespace flink{

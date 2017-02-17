@@ -1,4 +1,4 @@
-#include <Watchdog.hpp>
+#include "../include/Watchdog.hpp"
 using namespace flink;
 using namespace eeros::hal;
 

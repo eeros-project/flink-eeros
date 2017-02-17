@@ -1,4 +1,4 @@
-#include <DigOut.hpp>
+#include "../include/DigOut.hpp"
 #include <iostream>
 
 //using namespace flink::eeros;

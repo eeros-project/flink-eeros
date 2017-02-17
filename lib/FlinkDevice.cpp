@@ -1,4 +1,4 @@
-#include <FlinkDevice.hpp>
+#include "../include/FlinkDevice.hpp"
 #include <eeros/core/EEROSException.hpp>
 #include <iostream>
 

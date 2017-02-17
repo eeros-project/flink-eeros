@@ -4,7 +4,7 @@
 #include <string>
 #include <flinklib.h>
 #include <eeros/hal/Output.hpp>
-#include <FlinkDevice.hpp>
+#include "FlinkDevice.hpp"
 
 namespace flink {
 	class Watchdog : public eeros::hal::Output<bool> {

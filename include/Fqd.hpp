@@ -4,7 +4,7 @@
 #include <string>
 #include <flinklib.h>
 #include <eeros/hal/ScalableInput.hpp>
-#include <FlinkDevice.hpp>
+#include "FlinkDevice.hpp"
 #include <limits>
 
 

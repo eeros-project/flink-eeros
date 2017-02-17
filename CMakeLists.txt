@@ -25,4 +25,4 @@ INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/FlinkDevice.hpp
 	      ${CMAKE_CURRENT_SOURCE_DIR}/include/AnalogIn.hpp 
 	      ${CMAKE_CURRENT_SOURCE_DIR}/include/Fqd.hpp 
 	      ${CMAKE_CURRENT_SOURCE_DIR}/include/Pwm.hpp 
-	      ${CMAKE_CURRENT_SOURCE_DIR}/include/Watchdog.hpp DESTINATION include)
+	      ${CMAKE_CURRENT_SOURCE_DIR}/include/Watchdog.hpp DESTINATION include/flinkeeros)

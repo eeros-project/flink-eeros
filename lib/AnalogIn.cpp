@@ -47,7 +47,7 @@ double AnalogIn::get() {
 }
 
 extern "C"{
-	eeros::hal::ScalableInput<double> *createAnalgIn(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, 
+	eeros::hal::ScalableInput<double> *createAnalogIn(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, 
 							 double scale, double offset, double rangeMin, double rangeMax, std::string unit, bool twosComplement){
 		return new flink::AnalogIn(id, libHandle, device, subDeviceNumber, channel, scale, offset, rangeMin, rangeMax, unit, twosComplement);
 	}

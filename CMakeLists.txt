@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 include_directories(${ADDITIONAL_INCLUDE_DIRS})
 link_directories(${ADDITIONAL_LINK_DIRS})
 
-find_package(flink REQUIRED)
+find_package(flink QUIET)
 include_directories(${FLINK_INCLUDE_DIR})
 link_directories(${FLINK_LIB_DIR})
 

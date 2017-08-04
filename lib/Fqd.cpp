@@ -1,4 +1,5 @@
 #include "../include/Fqd.hpp"
+#include <iostream>
 
 using namespace flink;
 using namespace eeros::hal;
@@ -23,17 +24,12 @@ Fqd::Fqd(std::string id,
 
 double Fqd::get() {
 	uint32_t data = 0;
-	flink_counter_get_count(subdeviceHandle, channel, &data);
-	int16_t newPos = static_cast<uint16_t>(data);
-	int16_t deltaPos = newPos - prevPos;
-	prevPos = newPos;
-	double delta = deltaPos / scale + offset;
-	pos += delta;
-	
-	if (getDelta)
-		return delta;
-	else
-		return pos;
+	flink_counter_get_count(subdeviceHandle, channel, &data);	// returns 16 bit value
+	int16_t actPos = static_cast<uint16_t>(data);
+	int16_t deltaPos = actPos - prevPos;
+	prevPos = actPos;
+	pos += deltaPos / scale + offset;
+	return pos;
 }
 
 void Fqd::reset() {

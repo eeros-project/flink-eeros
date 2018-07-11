@@ -2,7 +2,6 @@
 #include <iostream>
 
 using namespace flink;
-using namespace eeros::hal;
 
 AnalogOut::AnalogOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, 
 		     double scale, double offset, double rangeMin, double rangeMax, std::string unit) : 
@@ -22,22 +21,17 @@ AnalogOut::AnalogOut(std::string id, void* libHandle, std::string device, uint32
 }
 
 double AnalogOut::get() {
-	// TODO
-	return 0;
+	return value;
 }
 
-void AnalogOut::setValue(uint32_t value) {
-	
-	value &= bitMask;
+void AnalogOut::set(double outValue) {
+	this->value = outValue;
+	uint32_t val = static_cast<uint32_t>((outValue - offset)/scale);
+	val &= bitMask;
 	// check range
-	if( value > maxOut ) value = maxOut;
-	if( value < minOut ) value = minOut;
-	flink_analog_out_set_value(subdeviceHandle, channel, value);
-}
-
-void AnalogOut::set(double voltage) {
-	uint32_t value = static_cast<uint32_t>((voltage - offset)/scale);
-	setValue(value);
+	if( val > maxOut ) val = maxOut;
+	if( val < minOut ) val = minOut;
+	flink_analog_out_set_value(subdeviceHandle, channel, val);
 }
 
 extern "C"{

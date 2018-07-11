@@ -16,12 +16,12 @@ namespace flink{
 			  std::string unit = "");
 		virtual double get();
 		virtual void set(double value);
-		virtual void setValue(uint32_t value);
 	private:
 		flink_subdev* subdeviceHandle;
 		uint32_t channel;
 		uint32_t bitMask;
 		uint32_t resolution;
+		double value;
 	};
 };
 

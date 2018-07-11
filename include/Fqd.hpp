@@ -22,7 +22,7 @@ namespace flink {
 	private:
 		flink_subdev* subdeviceHandle;
 		uint32_t channel;
-		uint16_t prevPos;
+		int16_t prevPos;
 		double pos;
 		bool getDelta;
 	};

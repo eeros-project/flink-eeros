@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(RECOMMENDED_EEROS_VERSION 1.0.0.0)
 
+include(cmake/MunkeiVersionFromGit.cmake)
+version_from_git() # Fetch the library version information from git
+
 if(NOT DEFINED REQUIRED_EEROS_VERSION OR
    NOT REQUIRED_EEROS_VERSION MATCHES
        "^(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)$")

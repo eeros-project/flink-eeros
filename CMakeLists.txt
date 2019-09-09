@@ -23,7 +23,16 @@ else()
   endif(NOT ${REQUIRED_EEROS_VERSION} EQUAL ${RECOMMENDED_EEROS_VERSION})
 endif()
 
-find_package(EEROS ${REQUIRED_EEROS_VERSION} REQUIRED)
+
+find_package(EEROS ${REQUIRED_EEROS_VERSION} EXACT)
+
+if(EEROS_FOUND) # set by find_package()
+	message("EEROS version checked; v${REQUIRED_EEROS_VERSION} found.")
+else()
+	message(FATAL_ERROR "Make sure the required EEROS version is available "
+                   "or set the REQUIRED_EEROS_VERSION variable appropriately.")
+endif()
+
 
 include_directories(${ADDITIONAL_INCLUDE_DIRS})
 link_directories(${ADDITIONAL_LINK_DIRS})

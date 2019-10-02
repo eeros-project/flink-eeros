@@ -6,7 +6,6 @@ add_library(flinkeeros SHARED ${FLINKEEROS_SRCS})
 add_library(flinkeeros_static ${FLINKEEROS_SRCS})
 
 
-set(LIBRARY_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK})
 target_link_libraries(flinkeeros flink eeros)
 set_target_properties(flinkeeros PROPERTIES VERSION ${LIBRARY_VERSION})
 

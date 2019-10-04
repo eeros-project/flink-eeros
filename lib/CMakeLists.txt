@@ -5,7 +5,11 @@ set(FLINKEEROS_SRCS FlinkDevice.cpp DigOut.cpp DigIn.cpp AnalogOut.cpp AnalogIn.
 add_library(flinkeeros SHARED ${FLINKEEROS_SRCS})
 add_library(flinkeeros_static ${FLINKEEROS_SRCS})
 
+
 target_link_libraries(flinkeeros flink eeros)
+set_target_properties(flinkeeros PROPERTIES VERSION ${LIBRARY_VERSION})
+
 target_link_libraries(flinkeeros_static flink eeros)
 
-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/libflinkeeros.so ${CMAKE_CURRENT_BINARY_DIR}/libflinkeeros_static.a DESTINATION lib)
+INSTALL(TARGETS flinkeeros flinkeeros_static LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
+

@@ -1,26 +1,29 @@
 cmake_minimum_required(VERSION 3.5.1)
 
-project(flinkeeros)
+project(flink-eeros)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(RECOMMENDED_EEROS_VERSION 1.0.0.0)
 
-if(NOT DEFINED REQUIRED_EEROS_VERSION OR
-   NOT REQUIRED_EEROS_VERSION MATCHES
-       "^(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)$")
+set(RECOMMENDED_EEROS_VERSION 1.0.0.48)
 
-  set(REQUIRED_EEROS_VERSION ${RECOMMENDED_EEROS_VERSION})
-  message("Using recommended EEROS version, which is: v${REQUIRED_EEROS_VERSION}")
 
-else()
-  if(NOT ${REQUIRED_EEROS_VERSION} EQUAL ${RECOMMENDED_EEROS_VERSION})
-     message("You are not using the recommended EEROS version, "
-             "which would be: v${RECOMMENDED_EEROS_VERSION}")
-  endif(NOT ${REQUIRED_EEROS_VERSION} EQUAL ${RECOMMENDED_EEROS_VERSION})
+if(CMAKE_BUILD_TYPE MATCHES "Debug|DEBUG")
+	set(LOGGER ON)
 endif()
 
-find_package(EEROS ${REQUIRED_EEROS_VERSION} REQUIRED)
+
+include(cmake/versionCheckHelpers.cmake)
+
+
+setLibraryVersion()
+
+
+# Find EEROS
+setVersionToFind("EEROS" "REQUIRED_EEROS_VERSION" ${RECOMMENDED_EEROS_VERSION} ${REQUIRED_EEROS_VERSION})
+find_package(EEROS ${VERSION_TO_FIND} EXACT)
+checkIfModuleFound("EEROS" "REQUIRED_EEROS_VERSION")
+
 
 include_directories(${ADDITIONAL_INCLUDE_DIRS})
 link_directories(${ADDITIONAL_LINK_DIRS})
@@ -29,8 +32,12 @@ find_package(flink QUIET)
 include_directories(${FLINK_INCLUDE_DIR})
 link_directories(${FLINK_LIB_DIR})
 
+
 add_subdirectory(lib)
-add_subdirectory(test)
+
+
+createPackageFiles(flink-eerosConfig.cmake.in include/ lib/)
+
 
 INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/FlinkDevice.hpp 
 	      ${CMAKE_CURRENT_SOURCE_DIR}/include/DigOut.hpp 
@@ -40,3 +47,4 @@ INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/FlinkDevice.hpp
 	      ${CMAKE_CURRENT_SOURCE_DIR}/include/Fqd.hpp 
 	      ${CMAKE_CURRENT_SOURCE_DIR}/include/Pwm.hpp 
 	      ${CMAKE_CURRENT_SOURCE_DIR}/include/Watchdog.hpp DESTINATION include/flinkeeros)
+	      

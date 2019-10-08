@@ -18,12 +18,14 @@ namespace flink {
 		    std::string unit = "", bool getDelta = false);
 		virtual double get();
 		void reset();
+		void setPos(double position);
 		
 	private:
 		flink_subdev* subdeviceHandle;
 		uint32_t channel;
 		int16_t prevPos;
 		double pos;
+		double zeroPos;
 		bool getDelta;
 	};
 };

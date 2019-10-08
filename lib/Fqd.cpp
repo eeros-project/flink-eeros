@@ -15,10 +15,10 @@ Fqd::Fqd(std::string id,
 					 double rangeMax,
 					 std::string unit,
 					 bool getDelta) : 
-	ScalableInput<double>(id, libHandle, scale, offset, rangeMin, rangeMax, unit), channel(channel), prevPos(0), getDelta(getDelta)
-{
+	ScalableInput<double>(id, libHandle, scale, offset, rangeMin, rangeMax, unit), channel(channel), prevPos(0), getDelta(getDelta) {
 	FlinkDevice *dev = FlinkDevice::getDevice(device);
 	this->subdeviceHandle = flink_get_subdevice_by_id(dev->getDeviceHandle(), subDeviceNumber);
+	flink_subdevice_reset(subdeviceHandle);
 	reset();
 }
 
@@ -29,22 +29,29 @@ double Fqd::get() {
 	int16_t deltaPos = actPos - prevPos;
 	prevPos = actPos;
 	pos += deltaPos / scale + offset;
-	return pos;
+	return pos + zeroPos;
 }
 
 void Fqd::reset() {
-	flink_subdevice_reset(subdeviceHandle); // TODO only reset counter, not the subdevice!
-	pos = 0;
-	prevPos = 0;
+	setPos(0);
+}
+
+void Fqd::setPos(double position) {
+	pos = position;
+	zeroPos = position - get(); 
 }
 
 extern "C"{
 	eeros::hal::ScalableInput<double> *createFqd(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, 
-						     double scale, double offset, double rangeMin, double rangeMax, std::string unit){
+						     double scale, double offset, double rangeMin, double rangeMax, std::string unit) {
 		return new flink::Fqd(id, libHandle, device, subDeviceNumber, channel, scale, offset, rangeMin, rangeMax, unit);
 	}
 	
-	void resetFqd(flink::Fqd *obj){
+	void resetFqd(flink::Fqd *obj) {
 		obj->reset();
+	}
+	
+	void setFqdPos(flink::Fqd *obj, double position) {
+		obj->setPos(position);
 	}
 }

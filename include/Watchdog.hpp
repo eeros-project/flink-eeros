@@ -9,7 +9,7 @@
 namespace flink {
 	class Watchdog : public eeros::hal::Output<bool> {
 	public:
-		Watchdog(std::string id, void *libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double timeout = 0.05);
+		Watchdog(std::string id, void *libHandle, std::string device, uint32_t subDeviceNumber, double timeout = 0.05);
 		
 		virtual bool get();
 		virtual void set(bool b);
@@ -18,7 +18,6 @@ namespace flink {
 		
 	private:
 		flink_subdev* subdeviceHandle;
-		uint32_t channel;
 		uint32_t baseClock;
 		uint32_t counter;
 	};

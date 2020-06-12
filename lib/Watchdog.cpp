@@ -1,11 +1,16 @@
 #include "../include/Watchdog.hpp"
+#include <eeros/core/Fault.hpp>
+
 using namespace flink;
 using namespace eeros::hal;
+using namespace eeros;
 
-Watchdog::Watchdog(std::string id, void *libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double timeout) : 
-					Output<bool>(id, libHandle), channel(channel) {
+Watchdog::Watchdog(std::string id, void *libHandle, std::string device, uint32_t subDeviceNumber, double timeout) : 
+					Output<bool>(id, libHandle) {
 	FlinkDevice *dev = FlinkDevice::getDevice(device);
 	subdeviceHandle = flink_get_subdevice_by_id(dev->getDeviceHandle(), subDeviceNumber);
+	uint16_t function = flink_subdevice_get_function(subdeviceHandle);
+	if (function != WD_INTERFACE_ID) throw Fault("flink invalid subdevice number " + std::to_string(subDeviceNumber) + ", not a WD subdevice");
 	flink_wd_get_baseclock(subdeviceHandle, &baseClock);
 	setTimeout(timeout);
 }
@@ -34,7 +39,7 @@ void Watchdog::reset() {
 
 extern "C"{
 	eeros::hal::Output<bool> *createWatchdog(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double timeout){
-		return new flink::Watchdog(id, libHandle, device, subDeviceNumber, channel, timeout);
+		return new flink::Watchdog(id, libHandle, device, subDeviceNumber, timeout);
 	}
 	
 	void resetWatchdog(flink::Watchdog *obj){

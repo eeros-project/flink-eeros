@@ -1,7 +1,9 @@
 #include "../include/Pwm.hpp"
+#include <eeros/core/Fault.hpp>
 
 using namespace flink;
 using namespace eeros::hal;
+using namespace eeros;
 
 Pwm::Pwm(std::string id,
 				   void* libHandle,
@@ -16,14 +18,18 @@ Pwm::Pwm(std::string id,
 	) : ScalableOutput<double>(id, libHandle, scale, offset, rangeMin, rangeMax, unit), channel(channel) {
 	  
 	FlinkDevice *dev = FlinkDevice::getDevice(device);
-	this -> subdeviceHandle = flink_get_subdevice_by_id(dev->getDeviceHandle(), subDeviceNumber);
+	subdeviceHandle = flink_get_subdevice_by_id(dev->getDeviceHandle(), subDeviceNumber);
+	uint16_t function = flink_subdevice_get_function(subdeviceHandle);
+	if (function != PWM_INTERFACE_ID) throw Fault("flink invalid subdevice number " + std::to_string(subDeviceNumber) + ", not a PWM subdevice");
 	flink_pwm_get_baseclock(subdeviceHandle, &baseFrequency);
-// 	setDutyCycle(0.8);
+	if (channel < 0 || channel >= flink_subdevice_get_nofchannels(subdeviceHandle)) throw Fault("flink PWM subdevice, invalid channel number " + std::to_string(channel));
 }
 
 double Pwm::get() {
-	// TODO
-	return 0;
+	uint32_t period, hightime;
+	flink_pwm_get_period(subdeviceHandle, channel, &period);
+	flink_pwm_get_hightime(subdeviceHandle, channel, &hightime);
+	return (double)hightime / period;
 }
 
 void Pwm::set(double dutyCycle) {

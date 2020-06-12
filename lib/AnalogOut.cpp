@@ -1,7 +1,9 @@
 #include "../include/AnalogOut.hpp"
-#include <iostream>
+#include <eeros/core/Fault.hpp>
 
 using namespace flink;
+using namespace eeros::hal;
+using namespace eeros;
 
 AnalogOut::AnalogOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, 
 		     double scale, double offset, double rangeMin, double rangeMax, std::string unit) : 
@@ -9,6 +11,9 @@ AnalogOut::AnalogOut(std::string id, void* libHandle, std::string device, uint32
   
 	FlinkDevice *dev = FlinkDevice::getDevice(device);
 	this->subdeviceHandle = flink_get_subdevice_by_id(dev->getDeviceHandle(), subDeviceNumber);
+	uint16_t function = flink_subdevice_get_function(subdeviceHandle);
+	if (function != ANALOG_OUTPUT_INTERFACE_ID) throw Fault("flink invalid subdevice number " + std::to_string(subDeviceNumber) + ", not a DAC subdevice");
+	if (channel < 0 || channel >= flink_subdevice_get_nofchannels(subdeviceHandle)) throw Fault("flink DAC subdevice, invalid channel number " + std::to_string(channel));
 	
 	flink_analog_out_get_resolution(subdeviceHandle, &resolution);
 	bitMask = (1 << resolution) - 1;

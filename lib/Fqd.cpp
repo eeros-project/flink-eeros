@@ -1,8 +1,9 @@
 #include "../include/Fqd.hpp"
-#include <iostream>
+#include <eeros/core/Fault.hpp>
 
 using namespace flink;
 using namespace eeros::hal;
+using namespace eeros;
 
 Fqd::Fqd(std::string id, 
 					 void* libHandle, 
@@ -18,7 +19,10 @@ Fqd::Fqd(std::string id,
 	ScalableInput<double>(id, libHandle, scale, offset, rangeMin, rangeMax, unit), channel(channel), prevPos(0), getDelta(getDelta) {
 	FlinkDevice *dev = FlinkDevice::getDevice(device);
 	this->subdeviceHandle = flink_get_subdevice_by_id(dev->getDeviceHandle(), subDeviceNumber);
+	uint16_t function = flink_subdevice_get_function(subdeviceHandle);
+	if (function != COUNTER_INTERFACE_ID) throw Fault("flink invalid subdevice number " + std::to_string(subDeviceNumber) + ", not a FQD subdevice");
 	flink_subdevice_reset(subdeviceHandle);
+	if (channel < 0 || channel >= flink_subdevice_get_nofchannels(subdeviceHandle)) throw Fault("flink FQD subdevice, invalid channel number " + std::to_string(channel));
 	reset();
 }
 

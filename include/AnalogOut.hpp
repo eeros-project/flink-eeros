@@ -19,8 +19,6 @@ namespace flink{
 	private:
 		flink_subdev* subdeviceHandle;
 		uint32_t channel;
-		uint32_t bitMask;
-		uint32_t resolution;
 		double value;
 	};
 };

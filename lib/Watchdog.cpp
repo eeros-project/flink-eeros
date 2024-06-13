@@ -3,10 +3,11 @@
 
 using namespace flink;
 using namespace eeros::hal;
+using namespace eeros::logger;
 using namespace eeros;
 
 Watchdog::Watchdog(std::string id, void *libHandle, std::string device, uint32_t subDeviceNumber, double timeout) : 
-					Output<bool>(id, libHandle) {
+					Input<bool>(id, libHandle), log(Logger::getLogger()) {
 	FlinkDevice *dev = FlinkDevice::getDevice(device);
 	subdeviceHandle = flink_get_subdevice_by_id(dev->getDeviceHandle(), subDeviceNumber);
 	uint16_t function = flink_subdevice_get_function(subdeviceHandle);
@@ -15,11 +16,8 @@ Watchdog::Watchdog(std::string id, void *libHandle, std::string device, uint32_t
 	setTimeout(timeout);
 }
 
-void Watchdog::set(bool b) {
-	if (b)
-		flink_wd_set_counter(subdeviceHandle, counter);
-	else
-		flink_wd_set_counter(subdeviceHandle, 0);
+void Watchdog::reset() {
+	flink_wd_set_counter(subdeviceHandle, counter);
 }
 
 void Watchdog::setTimeout(double t) {
@@ -32,21 +30,26 @@ bool Watchdog::get() {
 	return static_cast<bool>(status);
 }
 
-void Watchdog::reset() {
+void Watchdog::arm() {
+	log.warn() << "arming the watchdog";
 	flink_wd_set_counter(subdeviceHandle, counter);
 	flink_wd_arm(subdeviceHandle);
 }
 
 extern "C"{
-	eeros::hal::Output<bool> *createWatchdog(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double timeout){
-		return new flink::Watchdog(id, libHandle, device, subDeviceNumber, timeout);
+	eeros::hal::Input<bool> *createWatchdog(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted, std::string timeout){
+		return new flink::Watchdog(id, libHandle, device, subDeviceNumber, std::stod(timeout));
 	}
 	
-	void resetWatchdog(flink::Watchdog *obj){
+	void reset(flink::Watchdog *obj){
 		obj->reset();
 	}
+
+	void arm(flink::Watchdog *obj){
+		obj->arm();
+	}
 	
-	void setWatchdogTimeout(flink::Watchdog *obj, double t){
+	void setTimeout(flink::Watchdog *obj, double t){
 		obj->setTimeout(t);
 	}
 }

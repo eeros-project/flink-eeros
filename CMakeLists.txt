@@ -23,7 +23,7 @@ if(CMAKE_BUILD_TYPE MATCHES "Debug|DEBUG")
 endif()
 
 if(LOAD_CMAKE_MODULES_LIB)
-  checkout_cmake_modules_lib_version(8fcde84)
+  checkout_cmake_modules_lib_version(504ffe3)
 endif()
 
 
@@ -40,12 +40,8 @@ set(REQUIRED_DEGREE_OF_VERSION_COMPATIBILITY 2 CACHE STRING "The required degree
 checkVersionCompatibility(${EEROS_VERSION} ${VERSION_TO_FIND} ${REQUIRED_DEGREE_OF_VERSION_COMPATIBILITY})
 
 
-include_directories(${ADDITIONAL_INCLUDE_DIRS})
-link_directories(${ADDITIONAL_LINK_DIRS})
-
-find_package(flink QUIET)
-include_directories(${FLINK_INCLUDE_DIR})
-link_directories(${FLINK_LIB_DIR})
+find_package(flink REQUIRED)
+link_directories(${flink_LIB_DIR})
 
 
 add_subdirectory(lib)

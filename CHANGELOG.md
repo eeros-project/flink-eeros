@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## v1.0.3
+(2024-06-13) ([GitHub compare v1.0.2...v1.0.3](https://github.com/eeros-project/flink-eeros/compare/v1.0.2...v1.0.3))
+
+### Added Features
+* Raise cmake module lib loader version, remove unnecessary statements
+* Change watchdog from using output to input
+* Allow negative values on analog out and remove bitmask
+
+
 ## v1.0.2
 (2023-12-15) ([GitHub compare v1.0.1...v1.0.2](https://github.com/eeros-project/flink-eeros/compare/v1.0.1...v1.0.2))
 

@@ -1,4 +1,4 @@
-# flinkeeros
+# flink-eeros
 The [EEROS Robotics Framework](https://github.com/eeros-project/eeros-framework) uses various [hardware libraries](http://wiki.eeros.org/eeros_architecture/hal/hardware_libraries) to access the underlying hardware. This wrapper library enables the usage of [flink](https://github.com/flink-project).
 
 ## Documentation
@@ -9,12 +9,13 @@ The [EEROS Robotics Framework](https://github.com/eeros-project/eeros-framework)
 ## Getting Started
 Check the following examples for the use of the wrapper library.
 - [Use on a cb20 Board](https://wiki.eeros.org/getting_started/install/use_with_cb20)
-- [Use on a Avnet Microzed Board](https://wiki.eeros.org/getting_started/install/use_with_microzed))
+- [Use on a Avnet Microzed Board](https://wiki.eeros.org/getting_started/install/use_with_microzed)
 - [EEROS Tutorial: Control a Single Motor](https://wiki.eeros.org/getting_started/tutorials/oneaxis).
 
 The EEROS [Hardware Abstraction Layer](http://wiki.eeros.org/eeros_architecture/hal/start) needs a [configuration file](http://wiki.eeros.org/eeros_architecture/hal/configuration_file) which describes the hardware. A sample hardware configuration file for this wrapper library can be found at
 - https://gitlab.ost.ch/tech/inf/public/cb20/-/blob/master/Software/cb20test/HwConfigCb20.json
 - https://github.com/eeros-project/eeros-framework/blob/master/examples/hal/HalTest2ConfigFlink.json
+- https://github.com/eeros-project/eeros-framework/blob/master/examples/hal/HalTest3ConfigFlink.json
 
 
 ## How to contribute to flink-eeros
